@@ -1,0 +1,9 @@
+{
+  "to": "+18002428478",
+  "instructions": "Have a natural conversation. Start with: \"Hey, how is your day going?\" Wait for their response. Then ask about San Francisco weather. Wait. Then ask for a fun fact. Keep it casual back-and-forth until you get the info.",
+  "opening_line": "Hey, how is your day going?",
+  "wait_for_hello": false,
+  "transcript_required": true,
+  "log_to_memory": true,
+  "test_mode": false
+}
