@@ -1,6 +1,6 @@
 {
   "name": "sidekick-outbound-calling",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "description": "Call real businesses from OpenClaw through Sidekick voice infrastructure.",
   "tools": [
     {
@@ -42,4 +42,3 @@
     }
   ]
 }
-
