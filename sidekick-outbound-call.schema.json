@@ -1,0 +1,87 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "sidekick_outbound_call",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "to",
+    "goal"
+  ],
+  "properties": {
+    "to": {
+      "type": "string",
+      "description": "Destination phone number in E.164 format, e.g. +14155551234.",
+      "pattern": "^\\+[1-9]\\d{7,14}$"
+    },
+    "goal": {
+      "type": "string",
+      "minLength": 1,
+      "description": "Natural-language objective for the call."
+    },
+    "test_mode": {
+      "type": "boolean",
+      "default": false,
+      "description": "If true, routes call to server-side OUTBOUND_TEST_MODE_NUMBER."
+    },
+    "wait_for_hello": {
+      "type": "boolean",
+      "default": false,
+      "description": "If true, backend suppresses immediate first_message so the callee can greet first."
+    },
+    "transcript_required": {
+      "type": "boolean",
+      "default": true,
+      "description": "If true, backend marks call if transcript data is missing and attempts hydration."
+    },
+    "log_to_memory": {
+      "type": "boolean",
+      "default": true,
+      "description": "If true, backend appends call outcome + transcript to memory log."
+    },
+    "greeting_delay_ms": {
+      "type": "integer",
+      "minimum": 0,
+      "maximum": 5000,
+      "default": 0,
+      "description": "Optional bridge delay before connecting AI leg."
+    },
+    "first_message": {
+      "type": "string",
+      "description": "Optional exact first spoken line."
+    },
+    "system_prompt": {
+      "type": "string",
+      "description": "Optional private context/instructions (not spoken verbatim)."
+    },
+    "task": {
+      "type": "string",
+      "description": "Optional short task label."
+    },
+    "details": {
+      "type": "object",
+      "description": "Optional free-form details for downstream logic."
+    },
+    "rules": {
+      "type": "object",
+      "description": "Optional guardrails/preferences for this call."
+    },
+    "contact_card": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "name": {
+          "type": "string"
+        },
+        "callback_phone": {
+          "type": "string",
+          "pattern": "^\\+[1-9]\\d{7,14}$"
+        },
+        "email": {
+          "type": "string",
+          "format": "email"
+        }
+      }
+    }
+  }
+}
+

@@ -1,0 +1,14 @@
+{
+  "to": "+14155551234",
+  "goal": "Call this business and ask what time they close today.",
+  "contact_card": {
+    "name": "Kodiak",
+    "callback_phone": "+14156453104"
+  },
+  "wait_for_hello": true,
+  "transcript_required": true,
+  "log_to_memory": true,
+  "greeting_delay_ms": 1000,
+  "test_mode": true
+}
+

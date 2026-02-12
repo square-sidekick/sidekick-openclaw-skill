@@ -1,0 +1,45 @@
+{
+  "name": "sidekick-outbound-calling",
+  "version": "1.0.0",
+  "description": "Call real businesses from OpenClaw through Sidekick voice infrastructure.",
+  "tools": [
+    {
+      "name": "sidekick_outbound_call",
+      "type": "http",
+      "method": "POST",
+      "url": "https://voice.squaresidekick.com/api/outbound/call",
+      "headers": {
+        "Authorization": "Bearer {{env.SIDEKICK_OUTBOUND_API_KEY}}",
+        "Content-Type": "application/json"
+      }
+    },
+    {
+      "name": "sidekick_call_status",
+      "type": "http",
+      "method": "GET",
+      "url": "https://voice.squaresidekick.com/api/outbound/call/{{call_id}}?live=1",
+      "headers": {
+        "Authorization": "Bearer {{env.SIDEKICK_OUTBOUND_API_KEY}}"
+      }
+    },
+    {
+      "name": "sidekick_wait_transcript",
+      "type": "http",
+      "method": "GET",
+      "url": "https://voice.squaresidekick.com/api/outbound/call/{{call_id}}/wait-transcript?timeout_ms=90000&interval_ms=2500",
+      "headers": {
+        "Authorization": "Bearer {{env.SIDEKICK_OUTBOUND_API_KEY}}"
+      }
+    },
+    {
+      "name": "sidekick_cancel_call",
+      "type": "http",
+      "method": "POST",
+      "url": "https://voice.squaresidekick.com/api/outbound/call/{{call_id}}/cancel",
+      "headers": {
+        "Authorization": "Bearer {{env.SIDEKICK_OUTBOUND_API_KEY}}"
+      }
+    }
+  ]
+}
+
