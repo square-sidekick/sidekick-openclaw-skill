@@ -4,8 +4,19 @@
   "type": "object",
   "additionalProperties": false,
   "required": [
-    "to",
-    "goal"
+    "to"
+  ],
+  "anyOf": [
+    {
+      "required": [
+        "goal"
+      ]
+    },
+    {
+      "required": [
+        "instructions"
+      ]
+    }
   ],
   "properties": {
     "to": {
@@ -16,7 +27,12 @@
     "goal": {
       "type": "string",
       "minLength": 1,
-      "description": "Natural-language objective for the call."
+      "description": "Natural-language objective for the call (primary field)."
+    },
+    "instructions": {
+      "type": "string",
+      "minLength": 1,
+      "description": "Alias for goal. Use this if your toolchain expects an instructions field."
     },
     "test_mode": {
       "type": "boolean",
@@ -26,7 +42,21 @@
     "wait_for_hello": {
       "type": "boolean",
       "default": false,
-      "description": "If true, backend suppresses immediate first_message so the callee can greet first."
+      "description": "If true, backend suppresses immediate first_message so the callee can greet first. Use false for interactive AI phone lines that answer immediately."
+    },
+    "load_memory": {
+      "type": "boolean",
+      "default": true,
+      "description": "If true, backend injects recent learned context from prior completed calls to this same destination number (merchant-scoped)."
+    },
+    "load_soul": {
+      "type": "boolean",
+      "default": false,
+      "description": "If true, backend loads optional SOUL context from server file configured by OUTBOUND_SOUL_FILE."
+    },
+    "memory_context": {
+      "type": "string",
+      "description": "Optional private per-call memory/context block appended to prompt (not spoken verbatim)."
     },
     "transcript_required": {
       "type": "boolean",
@@ -47,7 +77,11 @@
     },
     "first_message": {
       "type": "string",
-      "description": "Optional exact first spoken line."
+      "description": "Optional first spoken line. If omitted, backend derives one from goal/instructions."
+    },
+    "opening_line": {
+      "type": "string",
+      "description": "Optional exact opener used verbatim. Prevents auto-generated opener phrasing."
     },
     "system_prompt": {
       "type": "string",
@@ -84,4 +118,3 @@
     }
   }
 }
-
