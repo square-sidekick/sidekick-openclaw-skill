@@ -1,0 +1,12 @@
+{
+  "to": "+18002428478",
+  "instructions": "Have a natural conversation. Ask two short questions and wait between each.",
+  "opening_line": "Hey, how is your day going?",
+  "wait_for_hello": false,
+  "load_memory": true,
+  "load_soul": false,
+  "memory_context": "Keep this to a friendly 60-90 second exchange. Avoid sounding scripted.",
+  "transcript_required": true,
+  "log_to_memory": true,
+  "test_mode": false
+}
