@@ -1,10 +1,16 @@
 # Sidekick OpenClaw Skill
 
-Production-ready OpenClaw skill package for Sidekick outbound calling.
+OpenClaw skill for Sidekick outbound calling.
+
+Current version: `v1.0.0` (2026-02-12)
 
 This package lets an OpenClaw agent call real businesses through:
 
 `OpenClaw -> Sidekick API -> Twilio -> ElevenLabs voice agent -> callee`
+
+## Who this is for
+
+Builders using OpenClaw who want their agent to place real phone calls.
 
 ## What is included
 
@@ -16,18 +22,21 @@ This package lets an OpenClaw agent call real businesses through:
 
 ## Prerequisites
 
-- A Sidekick account with a claimed phone number
+- A free Sidekick account at `https://voice.squaresidekick.com` (sign up/login)
+- A claimed Sidekick phone number
 - API key created in Sidekick `/agent` via the `🦞` panel
 - OpenClaw runtime with env vars + HTTP tools enabled
 
 ## Quick Start (No commands)
 
-1. In Sidekick, create API key and copy it once.
-2. In OpenClaw, set env var:
+1. Go to `https://voice.squaresidekick.com`, create your free account, then log in.
+2. In Sidekick, create API key and copy it once.
+3. In Sidekick, claim a phone number if you have not already.
+4. In OpenClaw, set env var:
    - `SIDEKICK_OUTBOUND_API_KEY=<your-key>`
-3. Copy `sidekick-openclaw-skill.json` into your OpenClaw skills/tools config.
-4. Reload OpenClaw.
-5. Run first call using `test_mode: true` from `examples/request.test_mode.json`.
+5. Copy `sidekick-openclaw-skill.json` into your OpenClaw skills/tools config.
+6. Reload OpenClaw.
+7. Run first call using `test_mode: true` from `examples/request.test_mode.json`.
 
 ## Live call endpoint summary
 
@@ -47,9 +56,12 @@ This package lets an OpenClaw agent call real businesses through:
 ## Troubleshooting
 
 - `401 Unauthorized`
-  - API key missing/invalid in OpenClaw env.
+  - API key is missing or invalid in OpenClaw env.
 - `No transcript yet`
   - Poll status and call `wait-transcript` endpoint.
 - `Call failed`
   - Check destination number formatting (`+1...` E.164).
 
+## Support
+
+Open an issue in this repository for setup help or bug reports.
