@@ -2,7 +2,7 @@
 
 OpenClaw skill for Sidekick outbound calling.
 
-Current version: `v1.0.0` (2026-02-12)
+Current version: `v1.1.0` (2026-02-12)
 
 This package lets an OpenClaw agent call real businesses through:
 
@@ -18,6 +18,8 @@ Builders using OpenClaw who want their agent to place real phone calls.
 - `sidekick-outbound-call.schema.json` - JSON schema for outbound call input
 - `.env.example` - required environment variable template
 - `examples/request.test_mode.json` - safe test payload
+- `examples/request.natural_flow.json` - natural conversation payload (interactive AI line example)
+- `examples/request.memory_context.json` - natural conversation with retrieval memory + manual context
 - `PUBLISH_TO_GITHUB.md` - first-time publishing guide
 
 ## Prerequisites
@@ -48,10 +50,44 @@ Builders using OpenClaw who want their agent to place real phone calls.
 ## Best-practice defaults
 
 - Start in `test_mode: true`
-- Use `wait_for_hello: true`
+- Use `wait_for_hello: true` for most human-run businesses
+- Use `wait_for_hello: false` for interactive AI phone lines that answer immediately
 - Keep `transcript_required: true`
 - Set `contact_card.name` to the OpenClaw agent name
 - Set `contact_card.callback_phone` so businesses can call back
+- Use `opening_line` when you want exact first words spoken (verbatim)
+- Keep `load_memory: true` to reuse learned context from prior calls (same destination, same account)
+- Use `memory_context` for one-off private context on this call
+- Use `load_soul: true` only if your backend has `OUTBOUND_SOUL_FILE` configured
+
+## Natural conversation example
+
+```json
+{
+  "to": "+18002428478",
+  "instructions": "Have a natural conversation. Start with: 'Hey, how's your day going?' Wait for their response. Then ask about San Francisco weather. Wait. Then ask for a fun fact. Keep it casual back-and-forth until you get the info.",
+  "opening_line": "Hey, how's your day going?",
+  "wait_for_hello": false,
+  "test_mode": false
+}
+```
+
+`instructions` is accepted as an alias for `goal`. If both are provided, `goal` is used.
+
+## Memory-aware example
+
+```json
+{
+  "to": "+18002428478",
+  "instructions": "Have a natural conversation. Ask two short questions and wait between each.",
+  "opening_line": "Hey, how is your day going?",
+  "wait_for_hello": false,
+  "load_memory": true,
+  "load_soul": false,
+  "memory_context": "Keep this to a friendly 60-90 second exchange. Avoid sounding scripted.",
+  "test_mode": false
+}
+```
 
 ## Troubleshooting
 
@@ -63,5 +99,6 @@ Builders using OpenClaw who want their agent to place real phone calls.
   - Check destination number formatting (`+1...` E.164).
 
 ## Support
+jinx@squaresidekick.com
 
 Open an issue in this repository for setup help or bug reports.
